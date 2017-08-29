@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-weather-footer',
   template: `
   <footer>
-    <md-toolbar color="primary">
+    <md-toolbar color="primary" class="md-scroll-shrink" flex>
     <span>Observable Version. Angular Component Service Architecture. Intercomponent Communication.</span>
    <span class="example-fill-remaining-space"></span>
 
