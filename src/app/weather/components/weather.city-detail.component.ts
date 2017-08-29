@@ -1,5 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { CurrentCityWeather } from '../../models/current.city-weather';
+import { CitiesCollection } from '../../models/cities-collection';
 
 @Component({
   selector: 'app-weather-city-detail',
@@ -26,7 +28,7 @@ import { CurrentCityWeather } from '../../models/current.city-weather';
         <!-- new web component here -->
       </md-card-footer>
       <md-card-actions align="start">
-              <button md-raised-button color="warn" *ngIf="inCollection" (click)="remove.emit(city)">
+              <button md-raised-button color="warn" *ngIf="inCollection" (click)="remove.emit(city); inCollection = false;">
                     Remove City from Collection
               </button>
               <button md-raised-button color="primary" *ngIf="!inCollection" (click)="add.emit(city)">
@@ -67,20 +69,41 @@ import { CurrentCityWeather } from '../../models/current.city-weather';
     `
   ]
 })
-export class WeatherCityDetailComponent {
+export class WeatherCityDetailComponent implements OnInit {
   // TODO get more properties, details from API to display here in details component
   @Input() city: CurrentCityWeather;
   @Input() inCollection: boolean;
   @Output() add = new EventEmitter<CurrentCityWeather>();
   @Output() remove = new EventEmitter<CurrentCityWeather>();
-
+  subscription;
+  res;
   sun = '../../../assets/sun.png';
+
+  constructor(private activatedRoute: ActivatedRoute) {
+
+}
+
+ngOnInit() {
+  this.subscription = this.activatedRoute.params.subscribe(params => {
+    this.res = params['name'];
+    for (let i = 0; i < CitiesCollection.cityCollection.length; i++) {
+      for (let key in CitiesCollection.cityCollection[i]) {
+        if (CitiesCollection.cityCollection[i].hasOwnProperty(key)) {
+          if (CitiesCollection.cityCollection[i][key].name === this.res) {
+            this.inCollection = true;
+          }
+        }
+      }
+    }
+  });
+}
 
   get icon() {
     return this.city.icon;
     // get icon for weather here
   }
   get name() {
+    console.log('hello world');
     return this.city.name;
   }
   get country() {
