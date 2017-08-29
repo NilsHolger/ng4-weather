@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
   <footer>
     <md-toolbar color="primary">
-    <span>Promise Version. Angular Component Service Architecture. Intercomponent Communication.</span>
+    <span>Observable Version. Angular Component Service Architecture. Intercomponent Communication.</span>
    <span class="example-fill-remaining-space"></span>
 
    <span>Made with all <md-icon>favorite</md-icon> in the world</span>

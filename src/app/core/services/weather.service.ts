@@ -8,18 +8,17 @@ import { CurrentCityWeather } from '../../models/current.city-weather';
 
 @Injectable()
 export class WeatherService {
-  private WEATHER_URL = 'http://api.openweathermap.org/data/2.5';
-  private API_KEY = '5a043a1bd95bf3ee500eb89de107b41e';
+  private WEATHER_URL = 'https://api.openweathermap.org/data/2.5';
+  private API_KEY = 'f63da89e53880dcbe0f0afb8d0f12ca0';
 
   private currentCityWeather: CurrentCityWeather[] = [];
 
   constructor(private http: Http) {}
 
-  searchWeather(queryCity: string): Promise<CurrentCityWeather[]> {
+  searchWeather(queryCity: string): Observable<CurrentCityWeather[]> {
     return this.http.get(`${this.WEATHER_URL}/weather?q=${queryCity.trim()}&appid=${this.API_KEY}`)
-    .toPromise()
-    .then(res => this.transform(res.json() as CurrentCityWeather[]))
-    .catch(this.handleError);
+    .map(res => this.transform(res.json() as CurrentCityWeather[]));
+    // .catch(this.handleError);
   }
 
   private transform(data): CurrentCityWeather[] {

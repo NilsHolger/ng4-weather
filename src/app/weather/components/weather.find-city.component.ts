@@ -27,7 +27,7 @@ export class WeatherFindCityComponent implements OnInit {
       if (query === '' || query === null || query === undefined) {
         this.defaultSearch(['Hamburg', 'Paris', 'New York', 'London', 'Cape Town', 'Amsterdam']);
       } else {
-      this.weatherService.searchWeather(query).then (weather => this.weather = weather);
+      this.weatherService.searchWeather(query).subscribe(weather => this.weather = weather);
       }
      }
     ngOnInit() {
@@ -37,20 +37,7 @@ export class WeatherFindCityComponent implements OnInit {
     defaultSearch(countries: Array<string>) {
       [
         ...countries
-      ].forEach((city) => this.weatherService.searchWeather(city).then (weather => {
-                this.weather.push(weather[0]);
-              }));
-    }
-
-    defaultSearch1() {
-      [
-        'Tokyo',
-        'Istanbul',
-        'Berlin',
-        'San Francisco',
-        'Sydney',
-        'Rio de Janeiro'
-      ].forEach((city) => this.weatherService.searchWeather(city).then (weather => {
+      ].forEach((city) => this.weatherService.searchWeather(city).subscribe(weather => {
                 this.weather.push(weather[0]);
               }));
     }

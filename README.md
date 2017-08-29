@@ -1,9 +1,11 @@
 TODO:
-1. More data from the API for details view
+1. More data from the API for details view/Forecast
 2. Icons based on temperature
 3. Add/Remove toggle on Details page
 4. Observable version
 5. Redux Implementation
+6. Unit Tests
+7. E2E Tests
 
 # Ng4Weather
 
