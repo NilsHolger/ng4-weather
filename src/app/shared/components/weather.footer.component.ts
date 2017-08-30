@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
   <footer>
     <md-toolbar color="primary" class="md-scroll-shrink" flex>
-    <span>Observable Version. Angular Component Service Architecture. Intercomponent Communication.</span>
+    <span>Redux Version. Angular Component Store Architecture. Immutable. Pure Functions.</span>
    <span class="example-fill-remaining-space"></span>
 
    <span>Made with all <md-icon>favorite</md-icon> in the world</span>

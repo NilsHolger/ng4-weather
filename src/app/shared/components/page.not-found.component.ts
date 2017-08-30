@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-page-not-found',
@@ -16,6 +16,7 @@ import { Component } from '@angular/core';
         </md-card-actions>
       </md-card>
   `,
+  changeDetection : ChangeDetectionStrategy.OnPush,
   styles: [ `
     :host {
       display: flex;
@@ -65,6 +66,4 @@ import { Component } from '@angular/core';
       `
     ]
   })
-export class PageNotFoundComponent {
-
-}
+export class PageNotFoundComponent { }

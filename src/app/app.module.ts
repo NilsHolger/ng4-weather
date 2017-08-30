@@ -6,15 +6,17 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
-// import { StoreModule } from '@ngrx/store';
-// import { EffectsModule } from '@ngrx/effects';
-// import { DBModule } from '@ngrx/db';
-// import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
-// import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { DBModule } from '@ngrx/db';
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MomentModule } from 'angular2-moment';
 import { AppRoutingModule } from './app.routes';
 
-
+import { reducers, developmentReducerFactory } from './reducers';
+import { schema } from './db';
+import { environment } from '../environments/environment';
 import { WeatherService } from './core/services/weather.service';
 
 import { AppComponent } from './app.component';
@@ -60,7 +62,13 @@ import 'hammerjs';
     HttpModule,
     MaterialModule,
     MomentModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot(reducers, {
+      reducerFactory: !environment.production ? developmentReducerFactory : undefined
+    }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([]),
+    DBModule.provideDB(schema)
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]

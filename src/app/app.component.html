@@ -1,7 +1,7 @@
 
 <app-weather-layout>
-  <app-weather-sidenav [open]="showSideNav">
-    <app-weather-sidenav-nav-item (activate)="closeSideNav()" routerLink="collection" icon="location_city" hint="View Your Cities">
+  <app-weather-sidenav [open]="showSideNav$ | async">
+    <app-weather-sidenav-nav-item (activate)="closeSideNav()" routerLink="/" icon="location_city" hint="View Your Cities">
       My Cities
     </app-weather-sidenav-nav-item>
       <app-weather-sidenav-nav-item (activate)="closeSideNav()" routerLink="cities/search" icon="search" hint="Find Your Next City">
@@ -17,10 +17,11 @@
             Sign Out
           </app-weather-sidenav-nav-item>
   </app-weather-sidenav>
-<app-weather-toolbar (openMenu)="openSideNav()"></app-weather-toolbar>
+<app-weather-toolbar (openMenu)="openSideNav()">
+  Cities Collection
+</app-weather-toolbar>
 
 <router-outlet></router-outlet>
-
 
 </app-weather-layout>
 <app-weather-footer></app-weather-footer>

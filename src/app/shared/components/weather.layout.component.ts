@@ -21,6 +21,4 @@ import { Component } from '@angular/core';
     `
   ]
 })
-export class WeatherLayoutComponent {
-
-}
+export class WeatherLayoutComponent { }
